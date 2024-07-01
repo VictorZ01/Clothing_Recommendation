@@ -5,11 +5,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
+from sys import platform
 import time
 import pandas as pd
 import urllib
 import os 
 import shutil
+
 
 
 
@@ -51,11 +53,15 @@ tiles=bulk.find_all(attrs={"class":"fr-ec-product-tile-resize-wrapper"})
 for i in tiles:
     pictures.append(i.find("img").get("src"))
     x=(i.find("div",{"class":"fr-ec-content-alignment fr-ec-content-alignment--direction-row fr-ec-content-alignment--content-flex-start fr-ec-content-alignment--alignment-baseline fr-ec-price__amount"}))
+    if x==None:
+        x=i.find("div",{"class":"fr-ec-content-alignment fr-ec-content-alignment--direction-row fr-ec-content-alignment--content-flex-start fr-ec-content-alignment--alignment-baseline"})
     text_price=x.text
     price.append(text_price)
 
-
-path=(cwd+"\\Pictures\\")
+if platform=="Windows": 
+    path=(cwd+"\\Pictures\\")
+else:
+    path=(cwd+"//Pictures//")
 
 if not os.path.exists(path):
     os.mkdir(path)
@@ -63,8 +69,11 @@ else:
     shutil.rmtree(path) 
     os.makedirs(path)
 for i in range(len(price)):
-    print
-    urllib.request.urlretrieve(str(pictures[i]),"B:/WebScrapper/Pictures/file{}".format(i)+price[i]+".jpg")
+    if platform=="Windows": 
+        urllib.request.urlretrieve(str(pictures[i]),cwd+"/Pictures/file{}".format(i)+price[i]+".jpg")
+    else:
+        urllib.request.urlretrieve(str(pictures[i]),cwd+"/Pictures/file{}".format(i)+price[i]+".jpg")
+
 webpage.driver.quit()
 
 df=pd.DataFrame({"url":pictures,"price":price})
