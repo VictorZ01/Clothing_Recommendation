@@ -36,7 +36,7 @@ cwd=os.getcwd()
 
 #Uniqlo
  
-webpage.driver.get('https://www.uniqlo.com/us/en/search?q=hats') 
+webpage.driver.get('https://www.uniqlo.com/us/en/search?q=shirts') 
 
 response=webpage.scroll_down(1700)
 source=webpage.driver.page_source
@@ -50,7 +50,7 @@ tiles=bulk.find_all(attrs={"class":"fr-ec-product-tile-resize-wrapper"})
 
 for i in tiles:
     pictures.append(i.find("img").get("src"))
-    x=(i.find("div",{"class":"fr-ec-content-alignment fr-ec-content-alignment--direction-row fr-ec-content-alignment--content-flex-start fr-ec-content-alignment--alignment-baseline fr-ec-price__amount"}))
+    x=(i.find("div",{"fr-ec-price fr-ec-mt-spacing-01"}))
     text_price=x.text
     price.append(text_price)
 
