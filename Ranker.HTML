@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title> Rate Clothing Images</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
     <body>
-        <div class="image-holder">    </div>
+        <div id="image-holder">    </div>
         <div class="chooser">
-            <button id="recommendButton" onclick="recommend()" Recommend>
-            <button id="skipButton" onclick="nextImage()" Skip>
-            </button>
+            <button id="recommendButton" onclick="Recommend()">Recommend</button> 
+            <button id="skipButton" onclick="nextImage()">Skip</button> 
+            <button onclick="downloadCSV()">Download CSV</button>
             </div>
-        <script>src="saver.js"</script>
+        <script src="saver.js"></script>
     </body>
 <html>

@@ -40,7 +40,7 @@ cwd=os.getcwd()
  
 webpage.driver.get('https://www.uniqlo.com/us/en/search?q=shirts') 
 
-response=webpage.scroll_down(1700)
+response=webpage.scroll_down(1800)
 source=webpage.driver.page_source
 soup=BeautifulSoup(source,"html.parser")
 print("Finished with loading")
